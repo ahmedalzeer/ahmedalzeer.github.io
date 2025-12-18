@@ -13,6 +13,7 @@ const messages = {
         contact: "Contact",
         switch_to_ar: "عربي (AR)",
         switch_to_en: "English (EN)",
+
         project_card: {
             view_project: "View Project",
         },
@@ -26,7 +27,7 @@ const messages = {
         social_linkedin: "LinkedIn",
         social_email: "Email",
 
-        // 1. Experience Section (All 4 items from your CV)
+        // 1. Experience Section (Unified Structure)
         exp_title: "Professional Experience",
         exp_list: {
             acs: {
@@ -49,13 +50,13 @@ const messages = {
             },
             freelance: {
                 role: "PHP Developer (Freelancer)",
-                company: "Self-Employed",
+                company: "Freelance / Self-Employed",
                 date: "May 2018 - Aug 2019",
                 desc: "Created hotel management systems (booking, marketing, reports) and handled end-to-end web delivery.",
             },
         },
 
-        // 2. Projects Section (All projects from CV)
+        // 2. Projects Section
         proj_title: "Featured Projects",
         projects_data: {
             acp: {
@@ -73,14 +74,19 @@ const messages = {
                 desc: "Managing university vehicles, maintenance operations, and fuel logs.",
                 link: "https://mms.mu.edu.sa",
             },
-            Conference: {
+            events: {
                 title: "Conference Management System",
-                desc: "A comprehensive system for managing conferences, including invitations, attendance tracking, seminars, and workshops.",
+                desc: "Comprehensive system for managing conferences, invitations, attendance, and workshops.",
                 link: "https://event.mu.edu.sa/",
+            },
+            hotel: {
+                title: "Internal Hotel Suite",
+                desc: "Management system for online bookings, service dispatch, and marketing reports.",
+                link: "#",
             },
         },
 
-        // 3. Skills Section (Categorized)
+        // 3. Skills Section
         skills_title: "Technical Expertise",
         skills_categories: {
             languages: "Languages: PHP, JavaScript, Python",
@@ -99,9 +105,11 @@ const messages = {
         contact: "اتصل بنا",
         switch_to_ar: "عربي (AR)",
         switch_to_en: "English (EN)",
+
         project_card: {
             view_project: "مشاهدة المشروع",
         },
+
         // General Info
         name: "أحمد علي أحمد محمد",
         title: "مطور ويب شامل (Full Stack)",
@@ -111,20 +119,20 @@ const messages = {
         social_linkedin: "لينكد إن",
         social_email: "البريد الإلكتروني",
 
-        // 1. Experience Section
+        // 1. Experience Section (Unified Structure)
         exp_title: "الخبرة المهنية",
         exp_list: {
             acs: {
                 role: "مطور ويب شامل",
                 company: "شركة النظم الحاسوبية العربية | السعودية",
                 date: "سبتمبر 2022 - يوليو 2025",
-                desc: "قيادة مشاريع PHP باستخدام Laravel، دمج أنابيب $CI/CD$ عبر GitHub Actions، وتوجيه المطورين المبتدئين.",
+                desc: "قيادة مشاريع PHP باستخدام Laravel، دمج  $CI/CD$ عبر GitHub Actions، وتوجيه المطورين.",
             },
             namaatec: {
                 role: "مطور ويب شامل",
                 company: "شركة نماء تيك | السعودية",
                 date: "مايو 2021 - سبتمبر 2022",
-                desc: "تطوير تطبيقات ديناميكية بـ Laravel و Vue.js، وتحسين قواعد بيانات MySQL وتجربة المستخدم.",
+                desc: "تطوير تطبيقات ديناميكية بـ Laravel و Vue.js، وتحسين قواعد بيانات MySQL.",
             },
             mu: {
                 role: "مطور ويب شامل",
@@ -158,10 +166,15 @@ const messages = {
                 desc: "إدارة مركبات الجامعة، متابعة الصيانة، وجدولة صرف الوقود.",
                 link: "https://mms.mu.edu.sa",
             },
-            hotel: {
+            events: {
                 title: "نظام إدارة المؤتمرات",
-                desc: "نظام لإدارة المؤتمرات من دعوات وحضور وندوات وندوات و ورش عمل .",
+                desc: "نظام متكامل لإدارة المؤتمرات يشمل الدعوات، تسجيل الحضور، والورش العمل.",
                 link: "https://event.mu.edu.sa/",
+            },
+            hotel: {
+                title: "نظام إدارة الفنادق",
+                desc: "نظام لإدارة الحجوزات، طلبات الخدمة، وتقارير التسويق الداخلية.",
+                link: "#",
             },
         },
 

@@ -3,9 +3,14 @@
     <h1>{{ $t('exp_title') }}</h1>
 
     <div v-for="(job, key) in $tm('exp_list')" :key="key" class="job-card">
-      <h3>{{ $rt(job.role) }}</h3>
-      <span class="date">{{ $rt(job.date) }}</span>
-      <p>{{ $rt(job.desc) }}</p>
+      <div class="card-content">
+        <h3 class="role">{{ $rt(job.role) }}</h3>
+
+        <div class="company">{{ $rt(job.company) }}</div>
+
+        <span class="date">{{ $rt(job.date) }}</span>
+        <p class="description">{{ $rt(job.desc) }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -13,32 +18,37 @@
 <style scoped>
 .job-card {
   margin-bottom: 2.5rem;
-  border-left: 3px solid #007bff;
-  padding-left: 1.5rem;
+  padding-inline-start: 1.5rem;
+  border-inline-start: 4px solid #007bff;
   position: relative;
 }
 
-h3 {
-  color: #e0e0e0;
-  font-size: 1.4rem;
+.role {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.company {
+  color: #007bff;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .date {
-  color: #007bff;
-  font-weight: bold;
+  font-size: 0.85rem;
+  color: #888;
   display: block;
-  margin: 0.5rem 0;
+  margin-bottom: 12px;
 }
 
-p {
+.description {
   color: #ccc;
   line-height: 1.6;
 }
 
-:global(html[dir="rtl"]) .job-card {
-  border-left: none;
-  border-right: 3px solid #007bff;
-  padding-left: 0;
-  padding-right: 1.5rem;
+.job-card:hover {
+  border-inline-start-color: #42b883;
+  transition: 0.3s;
 }
 </style>
