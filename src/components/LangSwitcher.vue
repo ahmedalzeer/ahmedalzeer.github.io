@@ -8,7 +8,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { setDirection } from '../i18n';
+import { setDirection } from '../../src/lang';
 
 const { locale } = useI18n();
 
