@@ -1,0 +1,101 @@
+/* Base Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ======================================= */
+/* 1. CSS Variables (Theming) */
+/* ======================================= */
+
+/* --- Default: Dark Theme Variables --- */
+:root {
+    /* UI Colors */
+    --color-background: #121212;
+    --color-background-soft: #1a1a1a;
+    --color-text: #f0f0f0;
+    --color-text-soft: #b0b0b0;
+    --color-accent: #646cff;
+    --color-border: #333333;
+
+    /* SVG Background Colors for Dark Mode */
+    /*--svg-c1: #303030; /* Darker shade */
+    /*--svg-c2: #adefd1; /* Accent color */
+    /*--svg-c3: #646cff; /* Primary color */
+
+    font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Light Theme Overrides (Applied when data-theme="light") --- */
+:root[data-theme="light"] {
+    /* UI Colors */
+    --color-background: #ffffff;
+    --color-background-soft: #f4f4f4;
+    --color-text: #1a1a1a;
+    --color-text-soft: #555555;
+    --color-accent: #3b82f6;
+    --color-border: #cccccc;
+
+    /* SVG Background Colors for Light Mode */
+    /* --svg-c1: #f0f0f0;
+    --svg-c2: #d4e7ef;
+    --svg-c3: #a3d9ff; */
+}
+
+/* ======================================= */
+/* 2. Global Styles (Use Variables) */
+/* ======================================= */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+#app-container {
+    display: flex;
+}
+
+/* Links */
+a {
+    font-weight: 500;
+    color: var(--color-text-soft);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--color-text);
+}
+
+/* Buttons (General) */
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: var(--color-background-soft);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: border-color 0.25s, background-color 0.25s;
+}
+button:hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-background);
+}
+
+#app {
+    min-height: 300vh; /* مؤقت للتجربة */
+}

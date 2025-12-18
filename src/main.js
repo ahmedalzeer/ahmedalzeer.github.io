@@ -1,0 +1,39 @@
+import { createApp } from "vue";
+import "./style.css";
+import App from "./App.vue";
+import router from "./router";
+import i18n from "./i18n";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+import {
+    faHouse,
+    faFolderOpen,
+    faBriefcase,
+    faEnvelope,
+    faBars,
+    faXmark,
+    faGlobe,
+    faCode,
+    faSun,
+    faMoon,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+    faHouse,
+    faFolderOpen,
+    faBriefcase,
+    faEnvelope,
+    faBars,
+    faXmark,
+    faGlobe,
+    faCode,
+    faSun,
+    faMoon
+);
+
+createApp(App)
+    .use(router)
+    .use(i18n)
+    .component("font-awesome-icon", FontAwesomeIcon)
+    .mount("#app");
