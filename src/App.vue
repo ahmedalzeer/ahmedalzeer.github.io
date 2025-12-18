@@ -27,7 +27,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
-import NavBar from './components/NavBar.vue';
+import NavBar from './components/SideBar.vue';
 import SvgBackground from './components/SvgBackground.vue'
 
 const isMenuOpen = ref(false);

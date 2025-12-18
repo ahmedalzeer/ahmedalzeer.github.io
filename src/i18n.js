@@ -13,7 +13,9 @@ const messages = {
         contact: "Contact",
         switch_to_ar: "عربي (AR)",
         switch_to_en: "English (EN)",
-        view_project: "View Project",
+        project_card: {
+            view_project: "View Project",
+        },
 
         // General Info
         name: "Ahmed Ali Ahmed Mohamed",
@@ -71,10 +73,10 @@ const messages = {
                 desc: "Managing university vehicles, maintenance operations, and fuel logs.",
                 link: "https://mms.mu.edu.sa",
             },
-            hotel: {
-                title: "Internal Hotel Suite",
-                desc: "Management system for online bookings, service dispatch, and marketing reports.",
-                link: "#",
+            Conference: {
+                title: "Conference Management System",
+                desc: "A comprehensive system for managing conferences, including invitations, attendance tracking, seminars, and workshops.",
+                link: "https://event.mu.edu.sa/",
             },
         },
 
@@ -97,8 +99,9 @@ const messages = {
         contact: "اتصل بنا",
         switch_to_ar: "عربي (AR)",
         switch_to_en: "English (EN)",
-        view_project: "مشاهدة المشروع",
-
+        project_card: {
+            view_project: "مشاهدة المشروع",
+        },
         // General Info
         name: "أحمد علي أحمد محمد",
         title: "مطور ويب شامل (Full Stack)",
@@ -156,9 +159,9 @@ const messages = {
                 link: "https://mms.mu.edu.sa",
             },
             hotel: {
-                title: "نظام إدارة الفنادق",
-                desc: "نظام لإدارة الحجوزات، طلبات الخدمة، وتقارير التسويق الداخلية.",
-                link: "#",
+                title: "نظام إدارة المؤتمرات",
+                desc: "نظام لإدارة المؤتمرات من دعوات وحضور وندوات وندوات و ورش عمل .",
+                link: "https://event.mu.edu.sa/",
             },
         },
 
