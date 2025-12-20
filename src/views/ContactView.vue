@@ -17,7 +17,7 @@
             <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
             <div class="text-box">
               <label>{{ $t('phone') }}</label>
-              <p dir="ltr">+20 1015258850</p>
+              <p dir="ltr">00201015258850</p>
             </div>
           </div>
 
@@ -59,6 +59,46 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import emailjs from '@emailjs/browser';
+
+const { t } = useI18n();
+
+// Form State
+const formElement = ref(null);
+const loading = ref(false);
+const feedback = ref('');
+const statusType = ref(''); // 'success' or 'error'
+
+const handleSendEmail = async () => {
+  loading.value = true;
+  feedback.value = '';
+
+  try {
+    // Replace these IDs with your actual EmailJS credentials
+    // Get them at: https://dashboard.emailjs.com/
+    await emailjs.sendForm(
+      'service_zsrws4t',
+      'template_alwwz5x',
+      formElement.value,
+      '871Gg1bPKY_-9miak'
+    );
+
+    feedback.value = t('success_msg');
+    statusType.value = 'success';
+    formElement.value.reset(); // Clear form on success
+  } catch (error) {
+    console.error('Email Error:', error);
+    feedback.value = t('error_msg');
+    statusType.value = 'error';
+  } finally {
+    loading.value = false;
+  }
+};
+</script>
 
 <style scoped>
 /* Container & Layout */
