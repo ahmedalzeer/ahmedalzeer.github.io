@@ -4,7 +4,7 @@
             <font-awesome-icon :icon="['fab', 'github']" class="social-icon" />
         </a>
 
-        <a href="https://linkedin.com/in/ahmed-alzeer-989913168" target="_blank" :title="$t('social_linkedin')">
+        <a href="https://www.linkedin.com/in/ahmed-ali-989913168/" target="_blank" :title="$t('social_linkedin')">
             <font-awesome-icon :icon="['fab', 'linkedin']" class="social-icon" />
         </a>
 
