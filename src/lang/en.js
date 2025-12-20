@@ -9,7 +9,7 @@ export default {
     project_card: {
         view_project: "View Project",
     },
-    developer_name: "Ahmed Ali Ahmed Mohamed",
+    developer_name: "Ahmed Ali Alzeer",
     title: "Full Stack Developer",
     tagline:
         "Full Stack Developer with 7+ years of experience in designing and implementing high-performance solutions using Laravel, Vue.js, and MySQL. Proven track record in delivering scalable ERP systems and modern web applications.",

@@ -9,7 +9,7 @@ export default {
     project_card: {
         view_project: "عرض المشروع",
     },
-    developer_name: "أحمد علي أحمد محمد",
+    developer_name: "أحمد علي الزير",
     title: "مطور ويب متكامل (Full Stack Developer)",
     tagline:
         "مطور ويب متكامل بخبرة تزيد عن 7 سنوات في تصميم وتنفيذ حلول عالية الأداء باستخدام Laravel و Vue.js و MySQL. سجل حافل في تقديم أنظمة ERP قابلة للتوسع وتطبيقات ويب حديثة.",
