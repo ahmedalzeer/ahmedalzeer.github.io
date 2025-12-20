@@ -12,7 +12,7 @@
             <font-awesome-icon :icon="['fab', 'whatsapp']" class="social-icon" />
         </a>
 
-        <a href="/CV.pdf" download="Ahmed_Ali_CV.pdf" title="Download CV">
+        <a href="/CV.pdf" download="Ahmed_Ali_CV.pdf" target="_blank">
             <font-awesome-icon :icon="['fas', 'file-pdf']" class="social-icon" />
         </a>
 
