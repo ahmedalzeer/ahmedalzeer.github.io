@@ -1,34 +1,45 @@
 <template>
     <div class="sidebar" :class="[sidebarClass, { 'is-open': isMobileOpen }]">
-        <div class="mobile-close-container">
+
+        <div class="close-btn-container">
             <slot name="close-button"></slot>
         </div>
 
         <div class="sidebar-content">
-            <div class="logo">{{ $t('name') }}</div>
-            <nav>
+            <div class="logo-area">
+                <span class="logo-text">{{ $t('developer_name') }}</span>
+            </div>
+
+            <nav class="nav-menu">
                 <RouterLink to="/" active-class="active" @click="$emit('closeMenu')">
-                    <font-awesome-icon :icon="['fas', 'house']" class="nav-icon" /> {{ $t('home') }}
+                    <font-awesome-icon :icon="['fas', 'house']" class="nav-icon" />
+                    <span>{{ $t('home') }}</span>
                 </RouterLink>
                 <RouterLink to="/projects" active-class="active" @click="$emit('closeMenu')">
-                    <font-awesome-icon :icon="['fas', 'folder-open']" class="nav-icon" /> {{ $t('projects') }}
+                    <font-awesome-icon :icon="['fas', 'folder-open']" class="nav-icon" />
+                    <span>{{ $t('projects') }}</span>
                 </RouterLink>
                 <RouterLink to="/experience" active-class="active" @click="$emit('closeMenu')">
-                    <font-awesome-icon :icon="['fas', 'briefcase']" class="nav-icon" /> {{ $t('experience') }}
+                    <font-awesome-icon :icon="['fas', 'briefcase']" class="nav-icon" />
+                    <span>{{ $t('experience') }}</span>
                 </RouterLink>
                 <RouterLink to="/skills" active-class="active" @click="$emit('closeMenu')">
-                    <font-awesome-icon :icon="['fas', 'code']" class="nav-icon" /> {{ $t('skills') }}
+                    <font-awesome-icon :icon="['fas', 'code']" class="nav-icon" />
+                    <span>{{ $t('skills') }}</span>
                 </RouterLink>
                 <RouterLink to="/contact" active-class="active" @click="$emit('closeMenu')">
-                    <font-awesome-icon :icon="['fas', 'envelope']" class="nav-icon" /> {{ $t('contact') }}
+                    <font-awesome-icon :icon="['fas', 'envelope']" class="nav-icon" />
+                    <span>{{ $t('contact') }}</span>
                 </RouterLink>
             </nav>
 
-            <div class="switcher-container" @click="$emit('closeMenu')">
-                <button @click="toggleTheme" class="theme-toggle">
+            <div class="sidebar-footer">
+                <button @click="toggleTheme" class="theme-toggle-btn">
                     <font-awesome-icon :icon="theme === 'dark' ? ['fas', 'sun'] : ['fas', 'moon']" />
                 </button>
-                <LangSwitcher class="lang-switcher-button" />
+                <div class="lang-wrapper">
+                    <LangSwitcher />
+                </div>
             </div>
         </div>
     </div>
@@ -41,244 +52,132 @@ import { RouterLink } from 'vue-router';
 import LangSwitcher from './LangSwitcher.vue';
 
 const props = defineProps({
-    isMobileOpen: {
-        type: Boolean,
-        default: false
-    }
+    isMobileOpen: { type: Boolean, default: false }
 });
 defineEmits(['closeMenu']);
 
 const { locale } = useI18n();
-const sidebarClass = computed(() => {
-    return {
-        'rtl-position': locale.value === 'ar'
-    };
-});
+const sidebarClass = computed(() => ({
+    'rtl-mode': locale.value === 'ar'
+}));
 
-// --- Theme Logic ---
 const theme = ref('dark');
-
-const getTheme = () => {
-    return document.documentElement.getAttribute('data-theme') || 'dark';
-};
+const getTheme = () => document.documentElement.getAttribute('data-theme') || 'dark';
 
 const toggleTheme = () => {
-    const currentTheme = getTheme();
-    theme.value = currentTheme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('user-theme', theme.value);
-    document.documentElement.setAttribute('data-theme', theme.value);
+    const newTheme = getTheme() === 'dark' ? 'light' : 'dark';
+    theme.value = newTheme;
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('user-theme', newTheme);
 };
 
-onMounted(() => {
-    theme.value = getTheme();
-});
+onMounted(() => { theme.value = getTheme(); });
 </script>
 
 <style scoped>
-:root {
-    --sidebar-width: 250px;
-}
-
-/* ================================================= */
-/* 1. DESKTOP BASE (Fixed Sidebar) */
-/* ================================================= */
 .sidebar {
     position: fixed;
     top: 0;
-    height: 100%;
-    width: var(--sidebar-width);
-    padding: 0;
-    background-color: var(--color-background-soft);
-    color: var(--color-text);
-    display: flex;
-    flex-direction: column;
-    z-index: 100;
-    transition: all 0.3s ease;
     left: 0;
-    right: auto;
-    border-right: 1px solid var(--color-border);
-    border-left: none;
+    height: 100vh;
+    width: 280px;
+    background-color: var(--color-background-soft);
+    border-inline-end: 1px solid var(--color-border);
+    z-index: 1000;
+    /* Always hidden by default */
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.rtl-mode {
+    left: auto;
+    right: 0;
+    transform: translateX(100%);
+}
+
+.sidebar.is-open {
+    transform: translateX(0) !important;
 }
 
 .sidebar-content {
-    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 2rem 1.2rem;
 }
 
-.sidebar.rtl-position .sidebar-content {
-    align-items: flex-end;
+.logo-area {
+    padding: 10px 10px 2.5rem;
+    text-align: center;
 }
 
-:global(.content-area) {
-    margin-inline-start: var(--sidebar-width);
-    margin-inline-end: 0;
-}
-
-.sidebar.rtl-position {
-    left: auto;
-    right: 0;
-    border-right: none;
-    border-left: 1px solid var(--color-border);
-}
-
-.rtl-position~ :global(.content-area) {
-    margin-inline-start: 0;
-    margin-inline-end: var(--sidebar-width);
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-}
-
-nav {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-nav a {
-    padding: 0.75rem 0.5rem;
-    text-decoration: none;
-    color: var(--color-text-soft);
-    transition: color 0.3s;
-    text-align: left;
-    display: flex;
-    align-items: center;
-}
-
-.nav-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-inline-end: 15px;
-    /* زيادة المسافة قليلاً */
-}
-
-.sidebar.rtl-position .nav-icon {
-    margin-inline-end: 0;
-    margin-inline-start: 15px;
-}
-
-nav a:hover,
-nav a.active {
+.logo-text {
+    font-size: 1.1rem;
+    font-weight: 800;
     color: var(--color-text);
-    border-left: 3px solid var(--color-text);
+    text-transform: uppercase;
 }
 
-.sidebar.rtl-position nav a {
-    text-align: right;
-    flex-direction: row-reverse;
-    /* لضمان ترتيب الأيقونة والنص في RTL */
-}
-
-.sidebar.rtl-position nav a:hover,
-.sidebar.rtl-position nav a.active {
-    border-left: none;
-    border-right: 3px solid var(--color-text);
-}
-
-.switcher-container {
-    margin-top: auto;
+.nav-menu {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    padding-top: 20px;
+    flex-direction: column;
     gap: 10px;
 }
 
-.rtl-position .switcher-container {
-    justify-content: flex-end;
-}
-
-.theme-toggle {
-    background: none;
-    border: 1px solid var(--color-border);
+.nav-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
     color: var(--color-text-soft);
-    padding: 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    line-height: 1;
-    font-size: 1.1rem;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: background 0.2s;
 }
 
-.theme-toggle:hover {
+.nav-icon {
+    width: 1.2rem;
+    margin-inline-end: 15px;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    background: var(--color-background);
+    color: #007bff;
+}
+
+.sidebar-footer {
+    margin-top: 200px;
+    display: flex;
+    gap: 12px;
+    /* padding-top: 25px; */
+    align-items: center;
+}
+
+.theme-toggle-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: transparent;
     color: var(--color-text);
-    background-color: var(--color-background);
-}
-
-:global(.lang-switcher-button button) {
-    height: 40px;
-    padding: 0 10px !important;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-soft) !important;
-    background: none !important;
-    border: 1px solid var(--color-border) !important;
 }
 
-/* ================================================= */
-/* 2. MOBILE OVERRIDE */
-/* ================================================= */
-.mobile-close-container {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 15px;
-    z-index: 1001;
+.lang-wrapper {
+    flex: 1;
 }
 
-@media (max-width: 768px) {
-    :global(.content-area) {
-        margin-inline-start: 0 !important;
-        margin-inline-end: 0 !important;
-    }
+.close-btn-container {
+    top: 15px;
+    inset-inline-end: 15px;
+}
 
-    .mobile-close-container {
-        display: block;
-    }
-
-    .sidebar-content {
-        padding-top: 50px;
-    }
-
-    .sidebar.rtl-position .mobile-close-container {
-        left: auto;
-        right: 15px;
-    }
-
-    .sidebar,
-    .sidebar.rtl-position {
-        position: absolute;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 900;
-        height: 100vh;
-    }
-
-    .sidebar.is-open {
-        transform: translateX(0);
-    }
-
-    .sidebar.rtl-position {
-        left: auto;
-        right: 0;
-        transform: translateX(100%);
-    }
-
-    .sidebar.rtl-position.is-open {
-        transform: translateX(0);
-    }
+/* Ensure content doesn't have a permanent margin on desktop anymore */
+:global(.content-area) {
+    margin-inline-start: 0 !important;
 }
 </style>

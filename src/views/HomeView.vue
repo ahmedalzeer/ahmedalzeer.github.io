@@ -1,20 +1,20 @@
 <template>
     <div class="content-wrapper">
         <div class="image-container">
-            <img src="/src/assets/images/profile.jpg" :alt="$t('name')" class="profile-pic">
+            <img src="/src/assets/images/profile.jpg" :alt="$t('developer_name')" class="profile-pic">
         </div>
 
-        <h1 class="main-title">{{ $t('name') }}</h1>
+        <h1 class="main-title">{{ $t('developer_name') }}</h1>
         <h2 class="subtitle">{{ $t('title') }}</h2>
         <p class="tagline-text">{{ $t('tagline') }}</p>
 
-        <div class="social-links">
-            <a href="https://github.com/ahmedalzeer" target="_blank">{{ $t('social_github') }}</a>
-            <a href="https://linkedin.com/in/ahmed-alzeer-989913168" target="_blank">{{ $t('social_linkedin') }}</a>
-            <a href="mailto:AhmedAlzeeWebDeveloper@gmail.com">{{ $t('social_email') }}</a>
-        </div>
+        <SocialLinks />
     </div>
 </template>
+
+<script setup>
+import SocialLinks from "../components/SocialLinks.vue";
+</script>
 
 <style scoped>
 .content-wrapper {

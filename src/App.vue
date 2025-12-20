@@ -4,11 +4,14 @@
       <SvgBackground />
     </div>
 
-    <div class="mobile-header-bar" v-if="!isMenuOpen">
+    <div class="header-bar" :class="{ 'hidden': isMenuOpen }">
       <button @click="isMenuOpen = true" class="menu-toggle-button">
         <font-awesome-icon :icon="['fas', 'bars']" />
       </button>
+      <span class="header-title" v-if="!isMenuOpen">{{ $t('developer_name') }}</span>
     </div>
+
+    <div v-if="isMenuOpen" class="sidebar-overlay" @click="isMenuOpen = false"></div>
 
     <NavBar :is-mobile-open="isMenuOpen" @close-menu="isMenuOpen = false">
       <template v-slot:close-button>
@@ -32,18 +35,9 @@ import SvgBackground from './components/SvgBackground.vue'
 
 const isMenuOpen = ref(false);
 
-// --- Theme Logic (Initialization Only) ---
 const loadTheme = () => {
-  const savedTheme = localStorage.getItem('user-theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  let initialTheme = 'dark';
-  if (savedTheme) {
-    initialTheme = savedTheme;
-  } else if (!systemPrefersDark) {
-    initialTheme = 'light';
-  }
-  document.documentElement.setAttribute('data-theme', initialTheme);
+  const savedTheme = localStorage.getItem('user-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
 };
 
 onMounted(() => {
@@ -52,31 +46,41 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* The main content area where views are rendered */
 .content-area {
   flex-grow: 1;
   padding: 2rem;
   min-height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  /* Top padding to accommodate the fixed header */
+  padding-top: 70px;
 }
 
-/* ================================================= */
-/* MOBILE HEADER BAR (Fixed 50px high) */
-/* ================================================= */
-.mobile-header-bar {
-  display: none;
+.header-bar {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 50px;
-  z-index: 1000;
-
-  padding: 10px 15px;
+  height: 60px;
+  z-index: 900;
+  padding: 10px 20px;
   background-color: var(--color-background-soft);
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: opacity 0.3s;
+}
+
+.header-bar.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.header-title {
+  font-weight: bold;
+  color: var(--color-text);
+  font-size: 1.1rem;
 }
 
 .menu-toggle-button {
@@ -84,26 +88,31 @@ onMounted(() => {
   border: none;
   color: var(--color-text);
   font-size: 1.5rem;
-  padding: 0;
-  line-height: 1;
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .mobile-header-bar {
-    display: block;
-    /* Show header bar on mobile */
-  }
+.menu-close-button {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 950;
+}
 
-/* ================================================= */
-/* MOBILE FIX: Apply top padding to push content down */
-/* ================================================= */
 @media (max-width: 768px) {
   .content-area {
-    /* Pushes the content down below the 50px fixed mobile header */
-    padding-top: 70px;
+    padding: 80px 1rem 2rem;
   }
 }
 </style>

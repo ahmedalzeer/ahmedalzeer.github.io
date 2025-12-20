@@ -1,21 +1,26 @@
 <template>
-  <div class="experience-container">
+  <div>
     <h1>{{ $t('exp_title') }}</h1>
+    <div class="experience-container">
+      <div v-for="(job, key) in $tm('exp_list')" :key="key" class="job-card">
+        <div class="card-content">
+          <h3 class="role">{{ $rt(job.role) }}</h3>
 
-    <div v-for="(job, key) in $tm('exp_list')" :key="key" class="job-card">
-      <div class="card-content">
-        <h3 class="role">{{ $rt(job.role) }}</h3>
+          <div class="company">{{ $rt(job.company) }}</div>
 
-        <div class="company">{{ $rt(job.company) }}</div>
-
-        <span class="date">{{ $rt(job.date) }}</span>
-        <p class="description">{{ $rt(job.desc) }}</p>
+          <span class="date">{{ $rt(job.date) }}</span>
+          <p class="description">{{ $rt(job.desc) }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.experience-container {
+  margin: 50px;
+}
+
 .job-card {
   margin-bottom: 2.5rem;
   padding-inline-start: 1.5rem;

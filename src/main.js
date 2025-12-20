@@ -5,6 +5,7 @@ import router from "./router";
 import i18n from "./lang/index.js";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 import {
     faHouse,
@@ -29,7 +30,9 @@ library.add(
     faGlobe,
     faCode,
     faSun,
-    faMoon
+    faMoon,
+    faGithub,
+    faLinkedin
 );
 
 createApp(App)
