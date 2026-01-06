@@ -1,5 +1,6 @@
 <template>
     <div class="projects-wrapper">
+
         <h1>{{ $t('proj_title') }}</h1>
 
         <div class="project-grid">
@@ -7,7 +8,7 @@
                 <h3>{{ $rt(project.title) }}</h3>
                 <p>{{ $rt(project.desc) }}</p>
                 <a :href="$rt(project.link)" target="_blank" v-if="$rt(project.link) !== '#'">
-                    {{ $t('project_card.view_project') }}
+                    {{ $tm('project_card').view_project || 'View Project' }}
                 </a>
             </div>
         </div>
