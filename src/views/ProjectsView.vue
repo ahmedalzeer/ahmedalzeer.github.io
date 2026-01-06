@@ -7,7 +7,7 @@
                 <h3>{{ $rt(project.title) }}</h3>
                 <p>{{ $rt(project.desc) }}</p>
                 <a :href="$rt(project.link)" target="_blank" v-if="$rt(project.link) !== '#'">
-                    {{ $rt('project_card.view_project') }}
+                    {{ $t('project_card.view_project') }}
                 </a>
             </div>
         </div>
