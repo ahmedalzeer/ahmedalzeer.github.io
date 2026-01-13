@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
 
+        <!-- Favicon -->
         <link
             rel="icon"
             type="image/x-icon"
@@ -20,84 +21,90 @@
             sizes="16x16"
             href="./src/assets/images/favicon-16x16.png"
         />
-
         <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="./src/assets/images/apple-touch-icon.png"
         />
-
         <link
             rel="icon"
             type="image/png"
             sizes="192x192"
             href="./src/assets/images/web-app-manifest-192x192.png"
         />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ahmedalzeer.github.io/" />
-        <meta property="og:title" content="Ahmed Ali - Portfolio" />
-        <meta
-            property="og:description"
-            content="مرحباً بكم في معرض أعمالي، أنا أحمد علي مطور ويب."
-        />
-        <meta
-            property="og:image"
-            content="https://ahmedalzeer.github.io/src/assets/images/profile.jpg"
-        />
 
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://ahmedalzeer.github.io/" />
-        <meta property="twitter:title" content="Ahmed Ali - Portfolio" />
-        <meta
-            property="twitter:description"
-            content="مرحباً بكم في معرض أعمالي، أنا أحمد علي مطور ويب."
-        />
-        <meta
-            property="twitter:image"
-            content="https://ahmedalzeer.github.io/src/assets/images/profile.jpg"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Ahmed Ali | Full Stack Developer | Laravel & Vue.js</title>
+        <!-- SEO Title -->
+        <title>
+            Ahmed Ali | Ahmed Alzeer | أحمد علي | أحمد الزير | Full Stack
+            Developer
+        </title>
+
+        <!-- SEO Meta -->
         <meta
             name="description"
-            content="أحمد علي - مبرمج ويب Full Stack متخصص في تطوير تطبيقات Laravel و Vue.js. اكتشف مشاريعي ومهاراتي البرمجية في معرض أعمالي."
+            content="Ahmed Ali (أحمد علي الزير) مطور ويب Full Stack. يُعرف أيضًا باسم Ahmed Alzeer أو أحمد الزير. متخصص في Laravel و Vue.js."
         />
         <meta
             name="keywords"
-            content="Ahmed Ali, أحمد علي, مبرمج ويب, Laravel Developer, Vue.js Developer, Full Stack Developer, معرض أعمال مبرمج"
+            content="
+            Ahmed Ali,
+            Ahmed Alzeer,
+            Ahmed Ali Alzeer,
+            Ahmed Ali Ahmed,
+            أحمد علي,
+            أحمد الزير,
+            أحمد علي الزير,
+            مبرمج ويب,
+            مطور ويب,
+            Full Stack Developer,
+            Laravel Developer,
+            Vue.js Developer
+            "
         />
         <meta name="author" content="Ahmed Ali" />
         <link rel="canonical" href="https://ahmedalzeer.github.io/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <!-- Open Graph -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ahmedalzeer.github.io/" />
-        <meta property="og:title" content="Ahmed Ali | Full Stack Developer" />
+        <meta property="og:title" content="Ahmed Ali | أحمد علي الزير" />
         <meta
             property="og:description"
-            content="مبرمج ويب متخصص في بناء أنظمة احترافية باستخدام Laravel و Vue.js. شاهد أحدث مشاريعي."
+            content="Ahmed Ali (أحمد الزير) مطور ويب Full Stack متخصص في Laravel و Vue.js."
         />
         <meta
             property="og:image"
             content="https://ahmedalzeer.github.io/src/assets/images/profile.jpg"
         />
 
+        <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://ahmedalzeer.github.io/" />
-        <meta property="twitter:title" content="Ahmed Ali | Portfolio" />
+        <meta property="twitter:title" content="Ahmed Ali | أحمد الزير" />
         <meta
             property="twitter:description"
-            content="مطور تطبيقات ويب احترافية."
+            content="Full Stack Web Developer | مطور ويب Full Stack"
         />
         <meta
             property="twitter:image"
             content="https://ahmedalzeer.github.io/src/assets/images/profile.jpg"
         />
 
+        <!-- Schema.org -->
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "name": "Ahmed Ali",
+                "alternateName": [
+                    "Ahmed Alzeer",
+                    "Ahmed Ali Alzeer",
+                    "Ahmed Ali Ahmed",
+                    "أحمد علي",
+                    "أحمد الزير",
+                    "أحمد علي الزير"
+                ],
                 "url": "https://ahmedalzeer.github.io/",
                 "jobTitle": "Full Stack Web Developer",
                 "knowsAbout": [
@@ -107,17 +114,22 @@
                     "JavaScript",
                     "Web Development"
                 ],
-                "sameAs": [
-                    "https://github.com/ahmedalzeer",
-                    "https://linkedin.com/in/your-profile"
-                ]
+                "sameAs": ["https://github.com/ahmedalzeer"]
             }
         </script>
     </head>
+
     <body>
+        <!-- مهم للسيو داخل الصفحة -->
+        <h1 style="display: none">
+            Ahmed Ali – أحمد علي الزير – Ahmed Alzeer – أحمد الزير
+        </h1>
+
         <div id="app"></div>
+
         <script type="module" src="/src/main.js"></script>
 
+        <!-- Google Analytics -->
         <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-1NC4B5J68H"
@@ -131,6 +143,7 @@
             gtag("config", "G-1NC4B5J68H");
         </script>
 
+        <!-- GitHub Pages Fix -->
         <script type="text/javascript">
             (function (l) {
                 if (l.search[1] === "/") {
