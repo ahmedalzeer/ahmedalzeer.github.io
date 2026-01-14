@@ -16,7 +16,7 @@
 
                     <div class="nav-controls">
                         <button @click="toggleLanguage" class="glass-btn lang-btn">
-                            {{ $i18n.locale.toUpperCase() }}
+                            {{ locale === 'en' ? 'ar'.toUpperCase() : 'en'.toUpperCase() }}
                         </button>
                         <button @click="toggleTheme" class="glass-btn theme-btn">
                             <font-awesome-icon :icon="isDark ? 'sun' : 'moon'" />
