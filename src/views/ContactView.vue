@@ -6,52 +6,57 @@
       <div class="contact-layout">
         <div class="info-card">
           <div class="info-item">
-            <div class="icon-box"><i class="fas fa-envelope"></i></div>
-            <div class="text-box">
-              <label>{{ $t('email') }}</label>
-              <p class="break-text">AhmedAlzeeWebDeveloper@gmail.com</p>
+            <div class="icon-wrapper">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="details">
+              <span>{{ $t('email') }}</span>
+              <strong>AhmedAlzeeWebDeveloper@gmail.com</strong>
             </div>
           </div>
 
           <div class="info-item">
-            <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
-            <div class="text-box">
-              <label>{{ $t('phone') }}</label>
-              <p dir="ltr">00201015258850</p>
+            <div class="icon-wrapper">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="details">
+              <span>{{ $t('phone') }}</span>
+              <strong dir="ltr">00201015258850</strong>
             </div>
           </div>
 
           <div class="info-item">
-            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="text-box">
-              <label>{{ $t('location') }}</label>
-              <p>{{ $t('loc_val') }}</p>
+            <div class="icon-wrapper">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="details">
+              <span>{{ $t('location') }}</span>
+              <strong>{{ $t('loc_val') }}</strong>
             </div>
           </div>
         </div>
 
         <div class="form-card">
-          <form ref="formElement" @submit.prevent="handleSendEmail">
-            <div class="form-group">
+          <form ref="formElement" @submit.prevent="handleSendEmail" class="contact-form">
+            <div class="input-group">
               <label>{{ $t('name') }}</label>
               <input type="text" name="user_name" required :placeholder="$t('name')">
             </div>
 
-            <div class="form-group">
+            <div class="input-group">
               <label>{{ $t('email') }}</label>
               <input type="email" name="user_email" required placeholder="name@example.com">
             </div>
 
-            <div class="form-group">
+            <div class="input-group">
               <label>{{ $t('message') }}</label>
-              <textarea name="message" rows="4" required></textarea>
+              <textarea name="message" rows="5" required></textarea>
             </div>
 
-            <button type="submit" :disabled="loading" class="send-btn">
+            <button type="submit" :disabled="loading" class="submit-btn">
               <i v-if="loading" class="fas fa-spinner fa-spin"></i>
-              {{ loading ? $t('sending') : $t('send_message') }}
+              <span>{{ loading ? $t('sending') : $t('send_message') }}</span>
             </button>
-
             <p v-if="feedback" :class="['status-msg', statusType]">{{ feedback }}</p>
           </form>
         </div>
@@ -60,240 +65,157 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import emailjs from '@emailjs/browser';
-
-const { t } = useI18n();
-
-// Form State
-const formElement = ref(null);
-const loading = ref(false);
-const feedback = ref('');
-const statusType = ref(''); // 'success' or 'error'
-
-const handleSendEmail = async () => {
-  loading.value = true;
-  feedback.value = '';
-
-  try {
-    // Replace these IDs with your actual EmailJS credentials
-    // Get them at: https://dashboard.emailjs.com/
-    await emailjs.sendForm(
-      'service_zsrws4t',
-      'template_alwwz5x',
-      formElement.value,
-      '871Gg1bPKY_-9miak'
-    );
-
-    feedback.value = t('success_msg');
-    statusType.value = 'success';
-    formElement.value.reset(); // Clear form on success
-  } catch (error) {
-    console.error('Email Error:', error);
-    feedback.value = t('error_msg');
-    statusType.value = 'error';
-  } finally {
-    loading.value = false;
-  }
-};
-</script>
-
 <style scoped>
-/* Container & Layout */
 .contact-page {
-  padding: 40px 15px;
-  /* Reduced padding for mobile */
-  color: #fff;
+  width: 100%;
+  padding: 2rem;
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .main-title {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  /* Fluid typography */
-  color: #007bff;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  color: var(--color-primary);
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-layout {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  /* 2 columns for desktop */
-  gap: 25px;
-  align-items: start;
-}
-
-/* Cards Style */
-.info-card,
-.form-card {
-  background: #1a1a1a;
-  padding: clamp(20px, 4vw, 40px);
-  border-radius: 15px;
-  border: 1px solid #333;
+  gap: 30px;
+  align-items: stretch;
 }
 
 .info-card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 25px;
+  padding: 40px;
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+  width: 100%;
 }
 
-.icon-box {
-  min-width: 45px;
-  height: 45px;
-  background: rgba(0, 123, 255, 0.1);
-  color: #007bff;
+.icon-wrapper {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--color-primary), #6f42c1);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 18px;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 15px rgba(0, 123, 255, 0.2);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.details span {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-soft);
+  margin-bottom: 4px;
+}
+
+.details strong {
   font-size: 1.1rem;
-}
-
-.text-box {
-  overflow: hidden;
-  /* Prevent text overflow */
-}
-
-.break-text {
+  color: var(--color-text);
   word-break: break-all;
-  /* Prevents long emails from breaking layout on small screens */
-  font-size: 0.95rem;
 }
 
-.text-box label {
-  display: block;
-  color: #888;
-  font-size: 0.8rem;
-  margin-bottom: 2px;
+.form-card {
+  padding: 40px;
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
 }
 
-.text-box p {
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Form Styles */
-.form-group {
+.input-group {
   margin-bottom: 20px;
+  text-align: left;
 }
 
-.form-group label {
+.input-group label {
   display: block;
   margin-bottom: 8px;
-  font-size: 0.9rem;
-  color: #ccc;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 input,
 textarea {
   width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #0f0f0f;
-  color: #fff;
-  font-family: inherit;
-  transition: 0.3s;
+  padding: 15px;
+  background: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-text);
+  transition: 0.3s ease;
 }
 
 input:focus,
 textarea:focus {
-  border-color: #007bff;
+  border-color: var(--color-primary);
   outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
 }
 
-.send-btn {
+.submit-btn {
   width: 100%;
-  padding: 14px;
-  background: #007bff;
+  padding: 16px;
+  background: linear-gradient(90deg, var(--color-primary), #6f42c1);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: bold;
+  font-size: 1.1rem;
   cursor: pointer;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
   transition: 0.3s;
 }
 
-.send-btn:hover:not(:disabled) {
-  background: #0056b3;
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.send-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+:global(.futuristic-wrapper) .info-card,
+:global(.futuristic-wrapper) .form-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Status Messages */
-.status-msg {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.success {
-  color: #42b883;
-}
-
-.error {
-  color: #ff5252;
-}
-
-/* RTL Logic */
-:global([dir="rtl"]) .contact-layout {
-  direction: rtl;
-}
-
-:global([dir="rtl"]) .text-box {
+:global([dir="rtl"]) .details,
+:global([dir="rtl"]) .input-group {
   text-align: right;
 }
 
-:global([dir="rtl"]) .form-group label {
-  text-align: right;
-}
-
-/* RESPONSIVE BREAKPOINTS */
-@media (max-width: 992px) {
+@media (max-width: 900px) {
   .contact-layout {
     grid-template-columns: 1fr;
-    /* Switch to single column for tablets/mobile */
-    gap: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-title {
-    margin-bottom: 25px;
   }
 
-  .info-card,
-  .form-card {
-    padding: 20px;
-  }
-
-  .info-item {
-    gap: 12px;
-  }
-
-  .icon-box {
-    min-width: 40px;
-    height: 40px;
+  .info-card {
+    padding: 25px;
   }
 }
 </style>

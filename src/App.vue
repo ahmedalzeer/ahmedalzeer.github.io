@@ -1,118 +1,69 @@
 <template>
-  <div id="app-container">
-    <div class="background-svg">
-      <SvgBackground />
-    </div>
-
-    <div class="header-bar" :class="{ 'hidden': isMenuOpen }">
-      <button @click="isMenuOpen = true" class="menu-toggle-button">
-        <font-awesome-icon :icon="['fas', 'bars']" />
-      </button>
-      <span class="header-title" v-if="!isMenuOpen">{{ $t('developer_name') }}</span>
-    </div>
-
-    <div v-if="isMenuOpen" class="sidebar-overlay" @click="isMenuOpen = false"></div>
-
-    <NavBar :is-mobile-open="isMenuOpen" @close-menu="isMenuOpen = false">
-      <template v-slot:close-button>
-        <button @click="isMenuOpen = false" class="menu-close-button">
-          <font-awesome-icon :icon="['fas', 'xmark']" />
-        </button>
-      </template>
-    </NavBar>
-
-    <main class="content-area">
-      <RouterView />
-    </main>
+  <div id="app-root">
+    <SvgBackground v-if="currentLayout !== 'futuristic'" />
+    <transition name="fade-layout" mode="out-in">
+      <component :is="layouts[currentLayout]" />
+    </transition>
+    <button class="style-switcher-btn" @click="nextLayout">
+      <font-awesome-icon icon="wand-magic-sparkles" />
+      <span class="btn-txt">{{ currentLayout.toUpperCase() }}</span>
+    </button>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { RouterView } from 'vue-router';
-import NavBar from './components/SideBar.vue';
-import SvgBackground from './components/SvgBackground.vue'
+import { ref, computed, onMounted } from 'vue';
+import ClassicLayout from './layouts/ClassicLayout.vue';
+import ModernLayout from './layouts/ModernLayout.vue';
+import FuturisticLayout from './layouts/FuturisticLayout.vue';
+import SvgBackground from './components/SvgBackground.vue';
 
-const isMenuOpen = ref(false);
+const layouts = { classic: ClassicLayout, modern: ModernLayout, futuristic: FuturisticLayout };
+const currentLayout = ref(localStorage.getItem('user-layout') || 'classic');
 
-const loadTheme = () => {
-  const savedTheme = localStorage.getItem('user-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
+const nextLayout = () => {
+  const keys = Object.keys(layouts);
+  currentLayout.value = keys[(keys.indexOf(currentLayout.value) + 1) % keys.length];
+  localStorage.setItem('user-layout', currentLayout.value);
+  window.scrollTo(0, 0);
 };
 
 onMounted(() => {
-  loadTheme();
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('user-theme') || 'dark');
 });
 </script>
 
-<style scoped>
-.content-area {
-  flex-grow: 1;
-  padding: 2rem;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  /* Top padding to accommodate the fixed header */
-  padding-top: 70px;
+<style>
+.fade-layout-enter-active,
+.fade-layout-leave-active {
+  transition: opacity 0.4s;
 }
 
-.header-bar {
+.fade-layout-enter-from,
+.fade-layout-leave-to {
+  opacity: 0;
+}
+
+.style-switcher-btn {
   position: fixed;
-  top: 0;
-  width: 100%;
-  height: 60px;
-  z-index: 900;
-  padding: 10px 20px;
-  background-color: var(--color-background-soft);
-  border-bottom: 1px solid var(--color-border);
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 20px;
-  transition: opacity 0.3s;
+  gap: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.header-bar.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.header-title {
-  font-weight: bold;
-  color: var(--color-text);
-  font-size: 1.1rem;
-}
-
-.menu-toggle-button {
-  background: none;
-  border: none;
-  color: var(--color-text);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.menu-close-button {
-  background: none;
-  border: none;
-  color: var(--color-text);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px);
-  z-index: 950;
-}
-
-@media (max-width: 768px) {
-  .content-area {
-    padding: 80px 1rem 2rem;
+@media (max-width: 600px) {
+  .btn-txt {
+    display: none;
   }
 }
 </style>

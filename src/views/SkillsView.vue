@@ -3,7 +3,6 @@
         <h1 class="main-title">{{ $t('skills_title') }}</h1>
         <div class="skills-grid">
             <div v-for="(val, key) in $tm('skills_list')" :key="key" class="skill-group">
-                <!-- <strong class="label-text">{{ $t('skills_list.' + key) }}:</strong> -->
                 <span class="value-text">{{ $rt(val) }}</span>
             </div>
         </div>
@@ -14,10 +13,11 @@
 .skills-section {
     width: 100%;
     max-width: 900px;
+    margin: 0 auto;
 }
 
 .main-title {
-    color: #007bff;
+    color: var(--color-primary, #007bff);
     margin-bottom: 2rem;
     text-align: center;
 }
@@ -30,31 +30,30 @@
 
 .skill-group {
     padding: 20px;
-    background: #1a1a1a;
-    border: 1px solid #333;
+    background: var(--color-background-soft);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .skill-group:hover {
-    border-color: #007bff;
-    transform: translateY(-3px);
-}
-
-.label-text {
-    display: block;
-    color: #007bff;
-    text-transform: capitalize;
-    margin-bottom: 8px;
-    font-size: 1.1rem;
+    border-color: var(--color-accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .value-text {
-    color: #e0e0e0;
+    color: var(--color-text);
     line-height: 1.6;
+    font-weight: 500;
 }
 
 :global([dir="rtl"]) .skill-group {
     text-align: right;
+}
+
+:global(.futuristic-wrapper) .skill-group {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
 }
 </style>

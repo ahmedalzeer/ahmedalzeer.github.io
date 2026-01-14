@@ -18,12 +18,15 @@ import SocialLinks from "../components/SocialLinks.vue";
 
 <style scoped>
 .content-wrapper {
-    max-width: 700px;
     width: 100%;
-    margin-top: 5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* --- تنسيقات الصورة والأنميشن --- */
 .image-container {
     margin-bottom: 1.5rem;
 }
