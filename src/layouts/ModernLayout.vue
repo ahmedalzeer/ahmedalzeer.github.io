@@ -5,8 +5,9 @@
                 <div class="logo">{{ $t('developer_name') }}</div>
 
                 <div class="nav-links">
-                    <a v-for="l in ['home', 'skills', 'experience', 'projects', 'contact']" :key="l" :href="'#' + l">{{
-                        $t(l) }}</a>
+                    <a v-for="l in ['home', 'skills', 'experience', 'projects', 'contact']" :key="l" :href="'#' + l">
+                        {{ $t(l) }}
+                    </a>
                 </div>
 
                 <div class="nav-controls">
@@ -21,20 +22,32 @@
         </nav>
 
         <main class="sections-stack">
-            <section id="home">
+            <section id="home" class="hero-section">
                 <HomeView />
             </section>
-            <section id="skills">
-                <SkillsView />
+
+            <section id="skills" class="alternating-section">
+                <div class="content-wrapper">
+                    <SkillsView />
+                </div>
             </section>
-            <section id="experience">
-                <ExperienceView />
+
+            <section id="experience" class="alternating-section">
+                <div class="content-wrapper">
+                    <ExperienceView />
+                </div>
             </section>
-            <section id="projects">
-                <ProjectsView />
+
+            <section id="projects" class="alternating-section">
+                <div class="content-wrapper">
+                    <ProjectsView />
+                </div>
             </section>
-            <section id="contact">
-                <ContactView />
+
+            <section id="contact" class="alternating-section">
+                <div class="content-wrapper">
+                    <ContactView />
+                </div>
             </section>
         </main>
     </div>
@@ -77,7 +90,7 @@ onMounted(() => {
     width: 100%;
     z-index: 1000;
     background: var(--color-background-soft);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--color-border);
     padding: 0.8rem 0;
 }
@@ -91,9 +104,9 @@ onMounted(() => {
     padding: 0 20px;
 }
 
-.nav-links {
-    display: flex;
-    align-items: center;
+.logo {
+    font-weight: 800;
+    color: var(--color-primary);
 }
 
 .nav-links a {
@@ -101,16 +114,11 @@ onMounted(() => {
     text-decoration: none;
     color: var(--color-text);
     font-weight: 500;
-    transition: color 0.3s;
+    transition: 0.3s;
 }
 
 .nav-links a:hover {
     color: var(--color-accent);
-}
-
-.nav-controls {
-    display: flex;
-    gap: 10px;
 }
 
 .icon-btn {
@@ -119,42 +127,80 @@ onMounted(() => {
     border: 1px solid var(--color-border);
     padding: 8px 12px;
     border-radius: 8px;
-    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 45px;
+    transition: 0.3s;
 }
 
 .icon-btn:hover {
     background: var(--color-accent);
     color: white;
-    border-color: var(--color-accent);
 }
+
 
 .sections-stack section {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    padding: 100px 5%;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero-section {
     justify-content: center;
-    padding: 100px 20px;
-    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+    background: radial-gradient(circle at 50% 50%, rgba(var(--color-primary-rgb), 0.08), transparent 70%);
 }
 
-:global([dir="rtl"]) .nav-links a {
-    margin-left: 0;
-    margin-right: 20px;
+
+.alternating-section:nth-of-type(even) {
+    justify-content: flex-start;
+    text-align: left;
+    background-color: var(--color-background);
 }
 
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
+.alternating-section:nth-of-type(odd):not(.hero-section) {
+    justify-content: flex-end;
+    text-align: right;
+    background-color: var(--color-background-soft);
+}
 
-    .logo {
-        font-size: 0.9rem;
+#skills {
+    background: linear-gradient(to right, rgba(0, 123, 255, 0.03), transparent);
+}
+
+#experience {
+    background: linear-gradient(to left, rgba(111, 66, 193, 0.03), transparent);
+}
+
+#projects {
+    background: linear-gradient(to right, rgba(0, 212, 255, 0.03), transparent);
+}
+
+#contact {
+    background: linear-gradient(to left, rgba(66, 184, 131, 0.03), transparent);
+}
+
+/* دعم الاتجاه العربي RTL */
+:global([dir="rtl"]) .alternating-section:nth-of-type(even) {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+:global([dir="rtl"]) .alternating-section:nth-of-type(odd):not(.hero-section) {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+@media (max-width: 992px) {
+    .sections-stack section {
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 80px 20px;
     }
 }
 </style>

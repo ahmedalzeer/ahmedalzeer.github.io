@@ -16,7 +16,7 @@
 
                     <div class="nav-controls">
                         <button @click="toggleLanguage" class="glass-btn lang-btn">
-                            {{ locale === 'en' ? 'ar'.toUpperCase() : 'en'.toUpperCase() }}
+                            {{ locale.toUpperCase() }}
                         </button>
                         <button @click="toggleTheme" class="glass-btn theme-btn">
                             <font-awesome-icon :icon="isDark ? 'sun' : 'moon'" />
@@ -26,19 +26,19 @@
             </nav>
 
             <div class="glass-body">
-                <section id="home">
+                <section id="home" class="section-home">
                     <HomeView />
                 </section>
-                <section id="skills">
+                <section id="skills" class="section-alt">
                     <SkillsView />
                 </section>
-                <section id="experience">
+                <section id="experience" class="section-alt">
                     <ExperienceView />
                 </section>
-                <section id="projects">
+                <section id="projects" class="section-alt">
                     <ProjectsView />
                 </section>
-                <section id="contact">
+                <section id="contact" class="section-alt">
                     <ContactView />
                 </section>
             </div>
@@ -97,7 +97,7 @@ onMounted(() => {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.3;
+    opacity: 0.2;
     animation: move 20s infinite alternate;
 }
 
@@ -115,6 +115,14 @@ onMounted(() => {
     background: #6f42c1;
     bottom: -10%;
     right: -10%;
+}
+
+.b3 {
+    width: 300px;
+    height: 300px;
+    background: #00d4ff;
+    top: 40%;
+    left: 30%;
 }
 
 .glass-card {
@@ -149,13 +157,12 @@ onMounted(() => {
 
 .nav-links {
     display: flex;
-    gap: clamp(10px, 2vw, 25px);
+    gap: 20px;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--color-text);
-    font-size: 0.9rem;
     font-weight: 600;
     opacity: 0.7;
     transition: 0.3s;
@@ -179,28 +186,67 @@ onMounted(() => {
     border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
-}
-
-.glass-btn:hover {
-    background: var(--color-accent);
-    color: white;
-    transform: translateY(-2px);
 }
 
 .glass-body {
     flex: 1;
     overflow-y: auto;
     scroll-behavior: smooth;
-    padding: 20px;
 }
+
 
 section {
     min-height: 100%;
     display: flex;
     align-items: center;
+    padding: 80px 5%;
+    position: relative;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.section-home {
     justify-content: center;
-    padding: 60px 0;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(var(--color-accent-rgb), 0.05) 0%, transparent 70%);
+}
+
+
+section.section-alt:nth-of-type(even) {
+    justify-content: flex-start;
+    text-align: left;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+}
+
+section.section-alt:nth-of-type(odd) {
+    justify-content: flex-end;
+    text-align: right;
+    background: linear-gradient(-90deg, rgba(111, 66, 193, 0.02) 0%, transparent 100%);
+}
+
+#skills {
+    background-color: rgba(0, 123, 255, 0.02);
+}
+
+#experience {
+    background-color: rgba(111, 66, 193, 0.02);
+}
+
+#projects {
+    background-color: rgba(0, 212, 255, 0.02);
+}
+
+#contact {
+    background-color: rgba(66, 184, 131, 0.02);
+}
+
+:global([dir="rtl"]) section.section-alt:nth-of-type(even) {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+:global([dir="rtl"]) section.section-alt:nth-of-type(odd) {
+    justify-content: flex-start;
+    text-align: left;
 }
 
 @keyframes move {
@@ -214,19 +260,19 @@ section {
 }
 
 @media (max-width: 768px) {
+    section {
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 60px 20px;
+    }
+
     .glass-card {
         height: auto;
         min-height: 95vh;
-        margin: 10px;
     }
 
     .nav-links {
         display: none;
-    }
-
-    .nav-container {
-        justify-content: center;
-        gap: 20px;
     }
 }
 </style>
